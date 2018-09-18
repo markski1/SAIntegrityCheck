@@ -14,6 +14,7 @@ Languages available: Spanish, English.
 Ussage: Just run the program and review created file IntegrityReport.txt for details.
 
 Building: Just compile the .pas file with Free Pascal Compiler and default options.
+>Please note that the version of FPC bundled with Bloodshed's Dev-Pascal IDE does NOT include the md5 library, and thus won't build under it.
 
 TODO:
 - ~~Create program to generate databases of file paths and their respective hashes.~~ Unnecesary, using text instead.
