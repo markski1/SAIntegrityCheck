@@ -1,13 +1,13 @@
 program SA_Integrity_Check;
 uses md5, crt, sysutils;
-const VERSION = '1.1';
+const VERSION = '1.2';
 const AUTOR = 'Markski';
 
 type
 	bf = record
 		hash : string;
 		ruta : string;
-		priod: smallint;
+		priod: string[2];
 	end;
 
 function mensaje (msj: string; leng: integer): String;
@@ -22,13 +22,13 @@ begin
 		'mal': if ( leng = 1 ) then mensaje := ' inconcistency found. A report is available in the file IntegirtyReport.txt' else mensaje := ' inconsistencia(s) encontrada(s). Un reporte esta disponible en IntegrityReport.txt';
 		'nada': if ( leng = 1 ) then mensaje := 'No modified files were found, your GTA:SA install is in perfect stock state.' else mensaje := 'No se han encontrado archivos modificados. Tu instalacion de GTA:SA esta en perfecto estado.';
 		'mensajeArchivo': if ( leng = 1 ) then mensaje := 'The inconsistencies shown above could mean modified gameplay experience and some of the changes could potentially be considered cheats. Please check FileReferences.txt for information.' else mensaje := 'Las inconsistencias listadas arribas pueden significar una experiencia de juego modificado al punto de hasta llegar a ser considerado cheats en muchos servidores. Se recomienda encarecidamente que leas FileReferences.txt';
-		'salir': if ( leng = 1 ) then mensaje := 'You may now close the program.' else mensaje := 'Usted puede ahora cerrar el programa.';
+		'salir': if ( leng = 1 ) then mensaje := 'You may now close the program. Ver. '+VERSION+' by '+AUTOR else mensaje := 'Usted puede ahora cerrar el programa. Ver. '+VERSION+' por '+AUTOR;
 		else 
 			mensaje := 'Error de lenguajes.'
 	end;
 end;
 
-procedure chequearArchivo (lenguaje: integer; var err: integer; buffer: bf; var a: TextFile; var db: TextFile);
+procedure chequearArchivo (lenguaje: integer; var err: integer; buffer: bf; var a: text; var db: text);
 var
 	hasheo: String;
 	auxiliar: String;
@@ -47,8 +47,8 @@ var
 	i: Integer;
 	lenguaje: Integer;
 	err: Integer;
-	arch: TextFile;
-	db: TextFile;
+	arch: text;
+	db: text;
 	buffer: bf;
 begin
 	err := 0;
@@ -69,9 +69,12 @@ begin
 		clrscr;
 		writeln (mensaje('chequeando', lenguaje));
 		while not EOF(db) do begin
-			read(db, buffer.hash, buffer.ruta, buffer.priod);
-			if (buffer.priod = 0) then chequearArchivo(lenguaje, err, buffer, arch, db)
-			else if (buffer.priod = 1) AND (i = 2) then chequearArchivo(lenguaje, err, buffer, arch, db);
+			readln(db, buffer.hash);
+			readln(db, buffer.ruta);
+			readln(db, buffer.priod);
+			if (buffer.priod = '0') then begin
+			chequearArchivo(lenguaje, err, buffer, arch, db);
+			end else if (buffer.priod = '1') AND (i = 2) then chequearArchivo(lenguaje, err, buffer, arch, db);
 		end;
 		writeln (mensaje('finalizado', lenguaje));
 		if err > 0 then begin
