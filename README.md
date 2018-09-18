@@ -22,6 +22,5 @@ TODO:
 - Check for SA directory automatically.
 - Check for sideloaded cheats
 - Check for known keyloggers
-- Create program to generate databases of file paths and their respective hashes.
 - Change the hardcoded checks for ussage of said database file.
 - ?????
