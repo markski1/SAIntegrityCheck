@@ -9,4 +9,6 @@ To run the check, simply place SAIntegrityCheck.exe inside your GTA: San Andreas
 
 Languages available: Spanish, English.
 
+Ussage: Just run the program and review created file IntegrityReport.txt for details.
+
 Building: Just compile the .pas file with Free Pascal Compiler and default options.
