@@ -14,7 +14,11 @@ Ussage: Just run the program and review created file IntegrityReport.txt for det
 Building: Just compile the .pas file with Free Pascal Compiler and default options.
 
 TODO:
+- ~~Create program to generate databases of file paths and their respective hashes.~~ Unnecesary, using text instead.
+- ~~Change the hardcoded checks for ussage of said database file.~~ Done.
+- Check for SA directory automatically.
+- Check for sideloaded cheats
+- Check for known keyloggers
 - Create program to generate databases of file paths and their respective hashes.
 - Change the hardcoded checks for ussage of said database file.
-- Check for SA directory automatically.
 - ?????
