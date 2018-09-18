@@ -4,11 +4,11 @@ const VERSION = '1.1';
 const AUTOR = 'Markski';
 
 type
-	hashes = record
+	bf = record
 		hash : string;
 		ruta : string;
+		priod: smallint;
 	end;
-	archivo = file of hashes;
 
 function mensaje (msj: string; leng: integer): String;
 begin
@@ -28,18 +28,17 @@ begin
 	end;
 end;
 
-procedure chequearArchivo (lenguaje: integer; var err: integer; var irreg: string; defecto: string; lugar: string; var a: text);
+procedure chequearArchivo (lenguaje: integer; var err: integer; buffer: bf; var a: TextFile; var db: TextFile);
 var
 	hasheo: String;
 	auxiliar: String;
 begin
-	hasheo := MD5Print(MD5File(lugar));
-	if hasheo <> defecto then begin
+	hasheo := MD5Print(MD5File(buffer.ruta));
+	if hasheo <> buffer.hash then begin
 		err := err + 1;
-		writeln(mensaje('inconsistencia', lenguaje), lugar)		;
-		auxiliar := 'Archivo/File: ' + lugar + ' | MD5 original: ' + defecto + ' ; MD5 encontrado/found: ' + hasheo;
+		writeln(mensaje('inconsistencia', lenguaje), buffer.ruta);
+		auxiliar := 'Archivo/File: ' + buffer.ruta + ' | MD5 original: ' + buffer.hash + ' ; MD5 encontrado/found: ' + hasheo;
 		writeln(a, auxiliar);
-		irreg := irreg + auxiliar;
 	end;
 end;
 
@@ -48,11 +47,11 @@ var
 	i: Integer;
 	lenguaje: Integer;
 	err: Integer;
-	inconsistencias: String;
-	arch: text;
+	arch: TextFile;
+	db: TextFile;
+	buffer: bf;
 begin
 	err := 0;
-	inconsistencias := '';
 	writeln('Choose language / Elija su lenguaje');
 	writeln('1 - English - Ingles');
 	writeln('2 - Spanish - Castellano');
@@ -61,52 +60,18 @@ begin
 	writeln (mensaje('advertencia', lenguaje));
 	readln(i);
 	if i = 1 then begin
+		Assign(db, 'database.sicdb');
+		Reset(db);
 		Assign(arch, 'IntegrityReport.txt');
 		Rewrite(arch);
 		writeln (mensaje('visual', lenguaje));
 		readln(i);
 		clrscr;
 		writeln (mensaje('chequeando', lenguaje));
-		chequearArchivo(lenguaje, err, inconsistencias, '2840f08dd9753a5b13c60d6d1c165c9a', 'vorbis.dll', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '2b7b803311d2b228f065c45d13e1aeb2', 'vorbisFile.dll', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '309d860fc8137e5fe9e7056c33b4b8be', 'eax.dll', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '2afcb246fe97406b47f4c59deaf5b716', './anim/cuts.img', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '3359ba8cb820299161199ee7ef3f1c02', './anim/anim.img', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '4736b2c90b00981255f9507308ee9174', './anim/ped.ifp', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '6a484b0b2356c524207d939487f1bff1', './data/animgrp.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'f856ba3a4ba25ae10b561aa764fba0c4', './data/animviewer.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '2b33843e79bd113873a5d0fb02157749', './data/carcols.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '63138ab62a10428a7c88f0be8ece094d', './data/cargrp.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '6cbe845361e76aae35ddca300867cadf', './data/carmods.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '8762637e580eb936111859ffa29bddb4', './data/clothes.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '8e133355396761bd5cd16bf873154b30', './data/default.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '795a9c013ee683e286768e06e4a5e2d7', './data/gridref.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '2d2e4f7f05e2d82b25c88707096d3393', './data/gta.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '012841ec691f84de4606ddcbff89e997', './data/gta_quick.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '6868accef933f1855ec28ce193a78159', './data/handling.cfg', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '79d255c7a27bb49b50d680390e908e5a', './data/map.zon', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'b2f05657980e4a693f8ff5eadcbad8f8', './data/melee.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '46a5e7dff90078842e24d9de5e92cc3e', './data/object.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '67d960dde13228d4818e0f144adafe4e', './data/ped.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'fa1731066423ba0c584e757eda946f15', './data/pedgrp.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'd722c90c92f3ad5c1b531596769f61cd', './data/pedstats.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'a2713338dbbd55898a4195e4464c6b06', './data/plants.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '9eb4e4e474abd5da2f3961a5ef549f9e', './data/surface.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'c32c586e8ba35742e356e6525619f7c3', './data/surfaud.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '605dd0beabccc797ce94a51a3e4a09eb', './data/surfinfo.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'd66a121bc8f17a5b69e34b841744956c', './data/timecyc.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'c91ce6b9f69578dc0fcd890f6147224c', './data/timecycp.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, 'bdc3a0fced2402c5bc61585714457d4b', './data/vehicles.ide', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '690400ecc92169d9eaddaaa948903efb', './data/water.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '16fe5a3e8c57d02eb62a44a96d8b9d39', './data/water1.dat', arch);
-		chequearArchivo(lenguaje, err, inconsistencias, '0a9bb49003680364f9f9768e9bcea982', './data/weapon.dat', arch);
-		if i = 2 then begin
-			chequearArchivo(lenguaje, err, inconsistencias, '9282e0df8d7eee3c4a49b44758dd694b', './models/gta3.img', arch);
-			chequearArchivo(lenguaje, err, inconsistencias, '6143a72e8ff2974db14f65df65d952b0', './models/effects.fxp', arch);
-			chequearArchivo(lenguaje, err, inconsistencias, '0802650dfea37ed516e1c0f12ccb77d7', './models/effectsPC.txd', arch);
-			chequearArchivo(lenguaje, err, inconsistencias, 'dbe7e372d55914c39eb1d565e8707c8d', './models/gta_int.img', arch);
-			chequearArchivo(lenguaje, err, inconsistencias, '585f47abb0a6ea6c17d5a7638a1a07d9', './models/particle.txd', arch);
-			chequearArchivo(lenguaje, err, inconsistencias, 'cf9bfea2ea8e9045fe554763bd41ab85', './models/generic/vehicle.txd', arch);
+		while not EOF(db) do begin
+			read(db, buffer.hash, buffer.ruta, buffer.priod);
+			if (buffer.priod = 0) then chequearArchivo(lenguaje, err, buffer, arch, db)
+			else if (buffer.priod = 1) AND (i = 2) then chequearArchivo(lenguaje, err, buffer, arch, db);
 		end;
 		writeln (mensaje('finalizado', lenguaje));
 		if err > 0 then begin
@@ -117,9 +82,10 @@ begin
 			write(arch, 'No se encontraron inconsistencias. / No inconsistencies found.');
 		end;
 		Close(arch);
+		Close(db);
 	end else begin
 		writeln (mensaje('cancelado', lenguaje));
 	end;
 	writeln (mensaje('salir', lenguaje));
-	delay (65535); {shoddy method to make window not close inmediatly, the message above prompts users to close the program. will replace eventually}
+	delay (65535);
 end.
