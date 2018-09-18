@@ -1,5 +1,14 @@
 program SA_Integrity_Check;
 uses md5, crt, sysutils;
+const VERSION = '1.1';
+const AUTOR = 'Markski';
+
+type
+	hashes = record
+		hash : string;
+		ruta : string;
+	end;
+	archivo = file of hashes;
 
 function mensaje (msj: string; leng: integer): String;
 begin
@@ -112,5 +121,5 @@ begin
 		writeln (mensaje('cancelado', lenguaje));
 	end;
 	writeln (mensaje('salir', lenguaje));
-	delay (65535);
+	delay (65535); {shoddy method to make window not close inmediatly, the message above prompts users to close the program. will replace eventually}
 end.
