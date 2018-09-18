@@ -12,3 +12,9 @@ Languages available: Spanish, English.
 Ussage: Just run the program and review created file IntegrityReport.txt for details.
 
 Building: Just compile the .pas file with Free Pascal Compiler and default options.
+
+TODO:
+-Create program to generate databases of file paths and their respective hashes.
+-Change the hardcoded checks for ussage of said database file.
+-Check for SA directory automatically.
+-?????
