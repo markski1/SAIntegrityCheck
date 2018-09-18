@@ -1,5 +1,5 @@
 # SAIntegrityCheck
-Integrity check for GTA: San Andreas
+###### Integrity check for GTA: San Andreas
 
 The purpouse of this program is to ensure players that their copies of GTA: San Andreas have the standard files and aren't modified to affect the gameplay in any way that could provide unexpected advantages or other kinds of differences. 
 
@@ -14,7 +14,7 @@ Ussage: Just run the program and review created file IntegrityReport.txt for det
 Building: Just compile the .pas file with Free Pascal Compiler and default options.
 
 TODO:
--Create program to generate databases of file paths and their respective hashes.
--Change the hardcoded checks for ussage of said database file.
--Check for SA directory automatically.
--?????
+- Create program to generate databases of file paths and their respective hashes.
+- Change the hardcoded checks for ussage of said database file.
+- Check for SA directory automatically.
+- ?????
