@@ -2,15 +2,15 @@
 
 REFERENCES:
 
-vorbisFile.dll is usually modified by the installation of CLEO. CLEO doesn't necesarily means cheats, so what's running here is up to your discression, as well as knowing wether what you're doing is good or not.
-If you didn't install any mod but you have a CLEO folder, deleting that folder should be enough to clean the install if this is your only modification, although I'd still encourage you to reinstall from other source if possible.
+`vorbisFile.dll` is usually modified by the installation of CLEO. CLEO doesn't necesarily means cheats, so what's running here is up to your discretion, as well as knowing whether what you're doing is good or not.  
+If you didn't install any mod but you have a CLEO folder, deleting that folder should be enough to clean the install if this is your only modification, although I'd still encourage you to reinstall from another source if possible.
 If you're not running CLEO or any other mod, then your installation might be compromised and you should reinstall from another source ASAP.
 
-Any file ending in .dat, .cfg or .ide tends to be files that define physics, weapon mechanics, damage, gameplay, model/skin movements, map zones, water, and everything in between. Unless you knowingly modded something here and trust it's harmless, if any of these files show inconsistencies you should reinstall from another source ASAP.
+Any file ending in `.dat`, `.cfg` or `.ide` tends to be files that define physics, weapon mechanics, damage, gameplay, model/skin movements, map zones, water, and everything in between. Unless you knowingly modded something here and trust it's harmless, if any of these files show inconsistencies you should reinstall from another source ASAP.
 
-gta3.img tends to be modified by the installation of vehicles (CAN MODIFY THE GAME DRAMATICALLY, ABSOLUTELY DO NOT DO THIS FOR MULTIPLAYER!), texture packs and other visual things.
-gta_int.img applies the same stuff as for gta3.img ; although this file specializes in interior maps. 
-particles.txt, effectsPC.txd, vehicles.txt and effects.fxp are usually modified by particle overhaul mods and generally don't interfere with the gameplay, so they're not to be considered cheats.
+`gta3.img` tends to be modified by the installation of vehicles (CAN MODIFY THE GAME DRAMATICALLY, ABSOLUTELY DO NOT DO THIS FOR MULTIPLAYER!), texture packs and other visual things.
+`gta_int.img` applies the same stuff as for `gta3.img`; although this file specializes in interior maps. 
+`particles.txt`, `effectsPC.txd`, `vehicles.txt` and `effects.fxp` are usually modified by particle overhaul mods and generally don't interfere with the gameplay, so they're not to be considered cheats.
 
 _______________________________________________________________________
 
