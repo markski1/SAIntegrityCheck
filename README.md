@@ -19,8 +19,7 @@ Building: Just compile the .pas file with Free Pascal Compiler and default optio
 TODO:
 - ~~Create program to generate databases of file paths and their respective hashes.~~ Unnecessary, using text instead.
 - ~~Change the hardcoded checks for ussage of said database file.~~ Done.
-- Check for SA directory automatically.
+- ~~Check for SA directory automatically.~~ Done.
 - Check for sideloaded cheats
 - Check for known keyloggers
-- Change the hardcoded checks for usage of said database file.
 - ?????
