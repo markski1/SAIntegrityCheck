@@ -1,6 +1,6 @@
 program SA_Integrity_Check;
 uses md5, crt, sysutils;
-const VERSION = '1.2';
+const VERSION = '1.2.1';
 const AUTOR = 'Markski';
 
 type
@@ -24,7 +24,7 @@ begin
 		'mensajeArchivo': if ( leng = 1 ) then mensaje := 'The inconsistencies shown above could mean modified gameplay experience and some of the changes could potentially be considered cheats. Please check FileReferences.txt for information.' else mensaje := 'Las inconsistencias listadas arribas pueden significar una experiencia de juego modificado al punto de hasta llegar a ser considerado cheats en muchos servidores. Se recomienda encarecidamente que leas FileReferences.txt';
 		'salir': if ( leng = 1 ) then mensaje := 'You may now close the program. Ver. '+VERSION+' by '+AUTOR else mensaje := 'Usted puede ahora cerrar el programa. Ver. '+VERSION+' por '+AUTOR;
 		else 
-			mensaje := 'Error de lenguajes.'
+			mensaje := 'Error loading languages / Error al cargar los lenguajes'
 	end;
 end;
 
@@ -91,4 +91,6 @@ begin
 	end;
 	writeln (mensaje('salir', lenguaje));
 	delay (65535);
+	readln(StringInput);
+	writeln StringInput;
 end.
