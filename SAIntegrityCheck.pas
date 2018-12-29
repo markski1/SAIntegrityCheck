@@ -50,6 +50,7 @@ var
 	arch: text;
 	db: text;
 	buffer: bf;
+	StringInput: string;
 begin
 	err := 0;
 	writeln('Choose language / Elija su lenguaje');
@@ -90,7 +91,6 @@ begin
 		writeln (mensaje('cancelado', lenguaje));
 	end;
 	writeln (mensaje('salir', lenguaje));
-	delay (65535);
 	readln(StringInput);
-	writeln StringInput;
+	writeln(StringInput);
 end.
