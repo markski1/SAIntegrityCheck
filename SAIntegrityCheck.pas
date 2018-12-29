@@ -1,6 +1,6 @@
 program SA_Integrity_Check;
 uses md5, crt, sysutils;
-const VERSION = '1.2.1';
+const VERSION = '1.3';
 const AUTOR = 'Markski';
 
 type
@@ -13,7 +13,7 @@ type
 function mensaje (msj: string; leng: integer): String;
 begin
 	case msj of
-		'advertencia': if ( leng = 1 ) then mensaje := 'Please make sure to run this executable in your San Andreas folder. Enter 1 to continue, 0 to exit.' else mensaje := 'Por favor asegurate de estar ejecutando este programa en la carpeta de San Andreas. Ingresa 1 para continuar, 0 para salir.';
+		'advertencia': if ( leng = 1 ) then mensaje := 'You should be running this executable in your GTA-SA folder, which you are not doing. Enter 1 to continue, 0 to exit.' else mensaje := 'Deberias estar ejecutando este programa en tu carpeta de GTA-SA, cosa que pareces no estar haciendo. Ingresa 1 para continuar, 0 para salir.';
 		'cancelado': if ( leng = 1 ) then mensaje := 'The program execution has been cancelled, no check has been done.' else mensaje := 'Se ha cancelado la ejecucion del programa y no se ha realizado ningun chequeo';
 		'visual': if ( leng = 1 ) then mensaje := 'Enter 1 to check essential files that could mean cheats or other unexpected effects. Press 2 to run a more complete procedure that checks files that modify visual aspects.' else mensaje := 'Ingrese 1 para hacer un chequeo de los archivos esenciales, que podrian significar cheats u otros cambios en el juego. Ingrese 2 para hacer un chequeo mas completo que incluye archivos visuales.';
 		'chequeando': if ( leng = 1 ) then mensaje := 'Executing integrity check. This can take quite a while depending on your specs.' else mensaje := 'Ejecutando chequeo de integridad. Esto puede tardar varios minutos dependiendo de tus especificaciones.';
@@ -22,7 +22,7 @@ begin
 		'mal': if ( leng = 1 ) then mensaje := ' inconsistency found. A report is available in the file IntegrityReport.txt' else mensaje := ' inconsistencia(s) encontrada(s). Un reporte esta disponible en IntegrityReport.txt';
 		'nada': if ( leng = 1 ) then mensaje := 'No modified files were found, your GTA:SA install is in perfect stock state.' else mensaje := 'No se han encontrado archivos modificados. Tu instalacion de GTA:SA esta en perfecto estado.';
 		'mensajeArchivo': if ( leng = 1 ) then mensaje := 'The inconsistencies shown above could mean modified gameplay experience and some of the changes could potentially be considered cheats. Please check FileReferences.txt for information.' else mensaje := 'Las inconsistencias listadas arribas pueden significar una experiencia de juego modificado al punto de hasta llegar a ser considerado cheats en muchos servidores. Se recomienda encarecidamente que leas FileReferences.txt';
-		'salir': if ( leng = 1 ) then mensaje := 'You may now close the program. Ver. '+VERSION+' by '+AUTOR else mensaje := 'Usted puede ahora cerrar el programa. Ver. '+VERSION+' por '+AUTOR;
+		'salir': if ( leng = 1 ) then mensaje := 'You may now close the program. Press ENTER to exit. Ver. '+VERSION+' by '+AUTOR else mensaje := 'Usted puede ahora cerrar el programa. Presione INTRO para salir. Ver. '+VERSION+' por '+AUTOR;
 		else 
 			mensaje := 'Error loading languages / Error al cargar los lenguajes'
 	end;
@@ -51,6 +51,7 @@ var
 	db: text;
 	buffer: bf;
 	StringInput: string;
+	ChequearGTAsa: string;
 begin
 	err := 0;
 	writeln('Choose language / Elija su lenguaje');
@@ -58,8 +59,12 @@ begin
 	writeln('2 - Spanish - Castellano');
 	readln(lenguaje);
 	clrscr;
-	writeln (mensaje('advertencia', lenguaje));
-	readln(i);
+	ChequearGTAsa := MD5Print(MD5File('gta_sa.exe'));
+	// Check for empty file hash
+	if ChequearGTAsa = 'd41d8cd98f00b204e9800998ecf8427e' then begin
+		writeln (mensaje('advertencia', lenguaje));
+		readln(i);
+	end else i := 1;
 	if i = 1 then begin
 		Assign(db, 'database.sicdb');
 		Reset(db);
